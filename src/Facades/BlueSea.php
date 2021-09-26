@@ -8,7 +8,7 @@ use BlueSea\Cms\Contracts\BlueSeaCmsService;
 /**
  * @method static void route($params = [])
  */
-class BlueSeaCms extends Facade
+class BlueSea extends Facade
 {
     public static function getFacadeAccessor()
     {
