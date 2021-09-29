@@ -7,6 +7,7 @@ use BlueSea\Cms\Console\Commands\CreateBlueSeaCmsModel;
 use BlueSea\Cms\Console\Commands\CreateBlueSeaCmsModule;
 use BlueSea\Cms\Console\Commands\InstallBlueSeaCms;
 use BlueSea\Cms\Console\Commands\ClearCache;
+use BlueSea\Cms\Console\Commands\CacheServerConfig;
 use BlueSea\Cms\Console\Commands\CreateBlueSeaCmsController;
 use BlueSea\Cms\Console\Commands\CreateBlueSeaCmsResource;
 use BlueSea\Cms\Console\Commands\EstablishRoute;
@@ -69,6 +70,7 @@ class BlueSeaServiceProvider extends ServiceProvider
             CreateBlueSeaCmsModule::class,
             CreateBlueSeaCmsResource::class,
             ClearCache::class,
+            CacheServerConfig::class,
             EstablishRoute::class,
             CreateBlueSeaCmsMigrations::class,
         ]);

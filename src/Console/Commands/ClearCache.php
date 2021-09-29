@@ -12,7 +12,7 @@ class ClearCache extends Command
      *
      * @var string
      */
-    protected $signature = 'BlueSeaCms:clear-cache';
+    protected $signature = 'bluesea:clear-cache';
 
     /**
      * The console command description.
