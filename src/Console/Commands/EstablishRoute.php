@@ -45,9 +45,15 @@ class EstablishRoute extends Command
         {
             $stub = $this->files->get($this->defaultRoutePath());
 
-            $output = "\n\nRoute::group(['prefix' => 'cms'], function() {\n\r\trequire __DIR__ . '/cms.php';\n\n});\n";
-            if(!str_contains($stub, $output))
+
+            $output = "BlueSea::routes(['prefix' => 'cms', 'as' => 'cms'], function() {\n\trequire __DIR__ . '/cms.php';\n});";
+            if(!str_contains($stub, "BlueSea::routes"))
             {
+                if(!str_contains($stub, "use BlueSea\Cms\Facades\BlueSea"))
+                {
+                    $stub = str_replace("<?php\n\n", "<?php\n\nuse BlueSea\Cms\Facades\BlueSea;\n", $stub);
+                }
+
                 $stub .= $output;
 
                 $this->files->put($this->defaultRoutePath(), $stub);

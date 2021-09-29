@@ -83,6 +83,8 @@ class CreateBlueSeaCmsModule extends Command
 
     public function createViews()
     {
+        $this->publishVendorViews();
+
         $this->info('Generating Views');
         $this->runCommand(CreateBlueSeaCmsResource::class, [
             'name' => $this->argument('name'),
@@ -125,6 +127,13 @@ class CreateBlueSeaCmsModule extends Command
         $definition->addOption(new InputOption('--all', '-*', InputOption::VALUE_NONE, 'Adds All Feature Modules'));
 
         return $definition;
+    }
+
+    public function publishVendorViews()
+    {
+        $this->runCommand(CreateBlueSeaCmsResource::class, [
+            'name' => null,
+        ], $this->getOutput());
     }
 
     /**

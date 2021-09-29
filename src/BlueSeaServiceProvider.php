@@ -2,6 +2,7 @@
 
 namespace BlueSea\Cms;
 
+use App\View\Components\AppTemplate;
 use Illuminate\Support\ServiceProvider;
 use BlueSea\Cms\Console\Commands\CreateBlueSeaCmsModel;
 use BlueSea\Cms\Console\Commands\CreateBlueSeaCmsModule;
@@ -12,6 +13,7 @@ use BlueSea\Cms\Console\Commands\CreateBlueSeaCmsController;
 use BlueSea\Cms\Console\Commands\CreateBlueSeaCmsResource;
 use BlueSea\Cms\Console\Commands\EstablishRoute;
 use BlueSea\Cms\Console\Commands\CreateBlueSeaCmsMigrations;
+use Illuminate\Support\Facades\Blade;
 
 class BlueSeaServiceProvider extends ServiceProvider
 {
@@ -33,7 +35,7 @@ class BlueSeaServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->loadViewsFrom($this->resourcePath('views'), 'bluesea-cms');
     }
 
     public function registerPublishables()
