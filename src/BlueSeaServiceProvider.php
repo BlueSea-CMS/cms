@@ -12,9 +12,22 @@ use BlueSea\Cms\Console\Commands\CreateBlueSeaCmsController;
 use BlueSea\Cms\Console\Commands\CreateBlueSeaCmsResource;
 use BlueSea\Cms\Console\Commands\EstablishRoute;
 use BlueSea\Cms\Console\Commands\CreateBlueSeaCmsMigrations;
+use BlueSea\Cms\Console\Commands\PublishThemes;
+use BlueSea\Cms\Views\Components\AppTemplate;
+use Illuminate\Support\Str;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Blade;
 
 class BlueSeaServiceProvider extends ServiceProvider
 {
+    protected $files;
+
+
+    public function __construct($app)
+    {
+        parent::__construct($app);
+        $this->files = new Filesystem;
+    }
     /**
      * Register any application services.
      *
@@ -51,14 +64,33 @@ class BlueSeaServiceProvider extends ServiceProvider
 
     public function registerMigrations()
     {
-        $publishes = [];
+        // $files = [
+        //     'AnonymousComments',
+        //     'Blocks',
+        //     'Comments',
+        //     'MediaFiles'
+        // ];
 
-        foreach(glob($this->resourcePath('migrations') . '/*', GLOB_NOSORT) as $file)
-        {
-            $publishes[$file] = database_path('migrations/' . date('Y_m_d_His') . '_' .  basename($file));
-        }
+        // foreach($files as $file)
+        // {
+        //     $stub = $this->files->get($this->getMigrationStub());
 
-        $this->publishes($publishes, 'bluesea-migration');
+        //     $publishes = $this->files->get($this->resourcePath("migrations/{$file}.stub"));
+
+        //     $replaces = [
+        //         'DummyClass' => "Create{$file}Table",
+        //         'dummy_table' => "bluesea_" . Str::snake($file),
+        //         'DummySchema' => $publishes,
+        //     ];
+
+        //     $output = str_replace(array_keys($replaces), array_values($replaces), $stub);
+
+        //     $this->files->put(database_path('migrations/' . date('Y_m_d_His') . '_' . Str::snake("Create{$file}Table").'.php'), $output);
+
+        //     // $publishes[$file] = database_path('migrations/' . date('Y_m_d_His') . '_' . pathinfo($file, PATHINFO_FILENAME) . '.php');
+        // }
+
+        // $this->publishes($publishes, 'bluesea-migration');
     }
 
     public function registerCommands()
@@ -73,7 +105,13 @@ class BlueSeaServiceProvider extends ServiceProvider
             CacheServerConfig::class,
             EstablishRoute::class,
             CreateBlueSeaCmsMigrations::class,
+            PublishThemes::class,
         ]);
+    }
+
+    public function getMigrationStub()
+    {
+        return $this->resourcePath('migrations/migration.plain.stub');
     }
 
     public function resourcePath($res)

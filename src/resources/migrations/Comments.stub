@@ -1,0 +1,4 @@
+            $table->id();
+            $table->morphs('owner');
+            $table->text('content');
+            $table->timestamps();

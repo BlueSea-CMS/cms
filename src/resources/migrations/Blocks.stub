@@ -1,0 +1,7 @@
+            $table->id();
+            $table->morphs('owner');
+            $table->string('template')->nullable();
+            $table->text('data')->nullable();
+            $table->longText('draft_content')->nullable();
+            $table->longText('published_content')->nullable();
+            $table->timestamps();

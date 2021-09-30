@@ -1,6 +1,9 @@
 <?php
 
 return [
+
+    'theme' => 'default',
+
     'cache' => [
         'folder' => 'bluesea',
         'index' => 'cache_index',

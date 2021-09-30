@@ -15,4 +15,16 @@ trait HasBlocks
     {
         return $this->morphMany(Block::class, 'owner');
     }
+
+    public function renderBlocks()
+    {
+        $view = '';
+
+        foreach($this->blocks as $block)
+        {
+            $view .= $block->renderBlock();
+        }
+
+        return $view;
+    }
 }

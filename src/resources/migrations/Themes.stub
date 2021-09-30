@@ -1,0 +1,4 @@
+            $table->id();
+            $table->string('name')->unique();
+            $table->string('prefix')->unique();
+            $table->timestamps();
